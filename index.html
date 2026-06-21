@@ -75,8 +75,8 @@
     backdrop-filter:blur(8px);
     border-bottom:1px solid var(--line);
   }
-  .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
-  .nav .logo{height:42px;width:auto}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:92px}
+  .nav .logo{height:58px;width:auto}
   .nav ul{display:flex;gap:30px;list-style:none;align-items:center}
   .nav a.navlink{
     font-family:var(--display);font-weight:600;font-size:.95rem;
@@ -452,7 +452,7 @@
   btn && btn.addEventListener('click', ()=>{
     const shown = list.style.display === 'flex';
     list.style.display = shown ? '' : 'flex';
-    list.style.position='absolute';list.style.top='74px';list.style.right='0';
+    list.style.position='absolute';list.style.top='92px';list.style.right='0';
     list.style.left='0';list.style.flexDirection='column';list.style.background='var(--cream)';
     list.style.padding='18px 28px';list.style.gap='16px';list.style.borderBottom='1px solid var(--line)';
     if(shown){list.removeAttribute('style');}
