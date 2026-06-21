@@ -160,10 +160,8 @@
     <!-- Formspree endpoint for the CART supporter form -->
     <form action="https://formspree.io/f/xkolwpbb" method="POST">
 
-      <!-- redirect after submit. Currently points at the live workers.dev URL so it
-           works now. CHANGE to https://clermontcart.org/get-involved-success.html
-           once the domain is live. -->
-      <input type="hidden" name="_next" value="https://clermontcart-website.baayshorehoa.workers.dev/get-involved-success.html">
+      <!-- redirect after submit -->
+      <input type="hidden" name="_next" value="https://clermontcart.org/get-involved-success.html">
       <!-- subject line of the email CART receives -->
       <input type="hidden" name="_subject" value="New CART supporter sign-up">
       <!-- simple spam honeypot; bots fill it, humans don't -->
