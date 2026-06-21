@@ -153,33 +153,17 @@
 
   <!-- FORM CARD -->
   <div class="card">
-    <!-- ===================================================================
-         SETUP NOTE — delete this whole .setup-note block once the form is live.
-         Before this form can send, you need to:
-           1. Create the CART Gmail (clermontcart@gmail.com).
-           2. Make a free Formspree account using that Gmail.
-           3. Create a new form; Formspree gives you a form ID like  xdoqzabc
-           4. In the <form> tag below, replace  YOUR_FORM_ID  with that ID.
-           5. Replace the _next URL below with your real success page URL
-              once the domain is live, e.g.
-              https://clermontcart.org/get-involved-success.html
-         Until then, submissions won't go anywhere.
-    ==================================================================== -->
-    <div class="setup-note">
-      <b>SETUP:</b> this form isn't connected yet. Once the CART Gmail + Formspree
-      account exist, swap <b>YOUR_FORM_ID</b> into the form tag (see the comment in
-      the code) and delete this note. Until then it won't send.
-    </div>
 
     <div class="formhead">Add your name</div>
     <div class="formsub">Fields marked <span class="req">*</span> are required.</div>
 
-    <!-- Formspree: replace YOUR_FORM_ID with the real form ID from your Formspree dashboard -->
-    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <!-- Formspree endpoint for the CART supporter form -->
+    <form action="https://formspree.io/f/xkolwpbb" method="POST">
 
-      <!-- redirect after submit; once the domain is live use the full URL:
-           https://clermontcart.org/get-involved-success.html -->
-      <input type="hidden" name="_next" value="get-involved-success.html">
+      <!-- redirect after submit. Currently points at the live workers.dev URL so it
+           works now. CHANGE to https://clermontcart.org/get-involved-success.html
+           once the domain is live. -->
+      <input type="hidden" name="_next" value="https://clermontcart-website.baayshorehoa.workers.dev/get-involved-success.html">
       <!-- subject line of the email CART receives -->
       <input type="hidden" name="_subject" value="New CART supporter sign-up">
       <!-- simple spam honeypot; bots fill it, humans don't -->
