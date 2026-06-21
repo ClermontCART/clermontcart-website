@@ -110,30 +110,6 @@
 <main>
   <div class="wrap">
 
-    <!-- ===================================================================
-         SETUP NOTE — delete this whole .setup-note block once the library is live.
-         This page loads PDFs straight from Google Drive, the same way the
-         Bayshore HOA site does. To turn it on:
-           1. In the CART Google Drive, create a folder for each category below.
-           2. Drop the PDFs in, and set each file to
-              "Anyone with the link" → Viewer  (required, or it won't show).
-           3. Get a Google Drive API key from the CART Google Cloud Console,
-              restricted to the Drive API and the clermontcart.org domains.
-           4. In the script block at the bottom of this file, replace
-              YOUR_DRIVE_API_KEY  and each  YOUR_FOLDER_ID_*  with the real values.
-           5. Delete this note. The example cards disappear automatically once
-              a real API key is in place.
-    ==================================================================== -->
-    <div class="setup-note" id="setupNote">
-      <b>SETUP:</b> the document library isn't connected to Google Drive yet, so the
-      cards below are <b>examples</b> showing the layout. To go live:
-      <ol>
-        <li>Create a Drive folder per category and add the PDFs (set each to "Anyone with the link → Viewer").</li>
-        <li>Get a Drive API key from the CART Google Cloud Console.</li>
-        <li>In this file's script, swap in <b>YOUR_DRIVE_API_KEY</b> and each <b>YOUR_FOLDER_ID</b>, then delete this note.</li>
-      </ol>
-    </div>
-
     <div id="catcontainer"><!-- categories render here --></div>
 
     <div class="archive">
@@ -158,7 +134,7 @@
    ====================================================================== */
 
 // --- 1. Your Drive API key (from the CART Google Cloud Console) ---
-const DRIVE_API_KEY = "YOUR_DRIVE_API_KEY";
+const DRIVE_API_KEY = "AIzaSyD7GDWE0FKMcj13UsDf_XsX5yqIsD55sC0";
 
 // --- 2. One entry per category. Put each category's Drive folder ID in folderId. ---
 //        Folder IDs are the long string in the folder's URL and never change.
@@ -166,7 +142,7 @@ const CATEGORIES = [
   {
     title: "The Core Case",
     desc: "The documents that lay out CART's argument in full.",
-    folderId: "YOUR_FOLDER_ID_CORE",
+    folderId: "12J8K8PB908zaOukzymvuRyUClNF47VJd",
     examples: [
       { name: "SR 28 Corridor Development Impact Report (v3)", date: "June 2026" },
       { name: "The Case for a New Study — one-pager", date: "June 2026" }
@@ -175,7 +151,7 @@ const CATEGORIES = [
   {
     title: "Source Studies & Data",
     desc: "The underlying technical record the case is built on.",
-    folderId: "YOUR_FOLDER_ID_STUDIES",
+    folderId: "1outXaRRIfo-EDaYVqwwnTBqI_pPd-2M2",
     examples: [
       { name: "SR 28 Corridor Improvements — Executive Summary (CCTID, 2013)", date: "2013" }
     ]
@@ -183,7 +159,7 @@ const CATEGORIES = [
   {
     title: "Meeting Records",
     desc: "Public summaries of CART's meetings with officials.",
-    folderId: "YOUR_FOLDER_ID_MEETINGS",
+    folderId: "1sWZ9opOThU1fS78GZaPumBLQ0kEw2vco",
     examples: [
       { name: "ODOT District 8 Meeting — Public Summary", date: "June 2026" }
     ]
