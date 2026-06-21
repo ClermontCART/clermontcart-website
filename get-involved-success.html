@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You — CART</title>
+<link rel="icon" type="image/svg+xml" href="cart-icon.svg">
+<link rel="icon" type="image/png" href="cart-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;600;700;800;900&family=Overpass+Mono:wght@500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root{--teal:#1c5d7a;--teal-deep:#16485f;--orange:#e08a3c;--orange-deep:#c9762a;--green:#3f9e57;--cream:#fdfdf8;--paper:#f4efe4;--ink:#19242b;--muted:#5d6b72;--line:#e4ddcd;
+  --display:"Overpass",system-ui,sans-serif;--serif:"Source Serif 4",Georgia,serif;--mono:"Overpass Mono",monospace;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--serif);color:var(--ink);background:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;min-height:100vh}
+  h1,.display{font-family:var(--display)}
+  a{color:inherit}img,svg{display:block;max-width:100%}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px;width:100%}
+  header{position:sticky;top:0;z-index:50;background:rgba(253,253,248,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .nav .logo{height:42px}
+  .nav ul{display:flex;gap:30px;list-style:none;align-items:center}
+  .nav a.navlink{font-family:var(--display);font-weight:600;font-size:.95rem;text-decoration:none;color:var(--ink);position:relative;padding:.4em 0}
+  .nav a.navlink:hover{color:var(--teal)}
+  .menu-btn{display:none;background:none;border:0;cursor:pointer;font-family:var(--mono);font-weight:600;color:var(--teal);font-size:.85rem;letter-spacing:.1em}
+  .btn{display:inline-flex;align-items:center;gap:.5em;font-family:var(--display);font-weight:700;font-size:.95rem;padding:.72em 1.4em;border-radius:4px;text-decoration:none;background:var(--teal);color:#fff;border:2px solid transparent;transition:background .15s,transform .15s}
+  .btn:hover{background:var(--teal-deep);transform:translateY(-2px)}
+  .btn-orange{background:var(--orange)}.btn-orange:hover{background:var(--orange-deep)}
+  a:focus-visible,.btn:focus-visible{outline:3px solid #2f86c4;outline-offset:3px}
+  .thanks{flex:1;display:flex;align-items:center;padding:72px 0}
+  .thanks-inner{max-width:640px}
+  .check{width:64px;height:64px;border-radius:50%;background:#e6f3ea;display:flex;align-items:center;justify-content:center;margin-bottom:24px}
+  .check svg{width:34px;height:34px}
+  .thanks .eyebrow{font-family:var(--mono);font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--green)}
+  .thanks h1{font-weight:800;font-size:clamp(2rem,5vw,3rem);line-height:1.06;letter-spacing:-.015em;color:var(--teal);margin:.4em 0 .45em}
+  .thanks p{font-size:1.14rem;color:var(--muted);max-width:560px;margin-bottom:16px}
+  .thanks .next{margin-top:26px;background:var(--paper);border-radius:7px;padding:20px 22px;border-left:4px solid var(--orange)}
+  .thanks .next h2{font-family:var(--display);font-size:1.02rem;font-weight:700;color:var(--ink);margin-bottom:10px}
+  .thanks .next p{font-size:.98rem;margin-bottom:6px}
+  .actions{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap}
+  footer{background:var(--ink);color:rgba(255,255,255,.6);padding:30px 0;font-family:var(--mono);font-size:.76rem;letter-spacing:.03em}
+  .foot-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  @media(max-width:760px){.nav ul{display:none}.menu-btn{display:block}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a href="index.html" aria-label="CART home"><img src="cart-logo.svg" alt="CART — Clermont Area Roads and Traffic" class="logo"></a>
+    <nav aria-label="Primary"><ul>
+      <li><a class="navlink" href="index.html">Home</a></li>
+      <li><a class="navlink" href="documents.html">Documents</a></li>
+      <li><a class="navlink" href="updates.html">Updates</a></li>
+      <li><a class="navlink" href="get-involved.html">Get Involved</a></li>
+    </ul></nav>
+    <button class="menu-btn" aria-label="Menu" onclick="location.href='index.html'">MENU</button>
+  </div>
+</header>
+
+<main class="thanks">
+  <div class="wrap thanks-inner">
+    <div class="check" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#2e7d46" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+    </div>
+    <span class="eyebrow">You're on the list</span>
+    <h1>Thank you for adding your voice.</h1>
+    <p>Your name is now part of the resident support CART brings to ODOT and local officials. Every signature makes the case for a new SR 28 corridor study harder to ignore.</p>
+    <div class="next">
+      <h2>One thing that doubles your impact</h2>
+      <p>Forward this page to a neighbor or post it in your community group. The single most effective thing supporters do is bring one more person in.</p>
+      <p style="color:var(--teal);font-weight:600;font-family:var(--display)">clermontcart.org/get-involved</p>
+    </div>
+    <div class="actions">
+      <a class="btn" href="index.html">← Back to home</a>
+      <a class="btn btn-orange" href="documents.html">See the documents →</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <span>© 2026 Clermont Area Roads &amp; Traffic (CART)</span>
+    <span>Clermont County, Ohio</span>
+  </div>
+</footer>
+<script>const b=document.querySelector('.menu-btn');b&&b.addEventListener('click',()=>location.href='index.html');</script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Involved — Add Your Voice · CART</title>
+<meta name="description" content="Add your name in support of a new SR 28 corridor study. Numbers matter when CART meets with ODOT and local officials — every Clermont County resident counts.">
+<link rel="icon" type="image/svg+xml" href="cart-icon.svg">
+<link rel="icon" type="image/png" href="cart-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;600;700;800;900&family=Overpass+Mono:wght@500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#1c5d7a;--teal-deep:#16485f;--orange:#e08a3c;--orange-deep:#c9762a;
+    --green:#3f9e57;--blue:#2f86c4;--cream:#fdfdf8;--paper:#f4efe4;
+    --ink:#19242b;--muted:#5d6b72;--line:#e4ddcd;--line-soft:#eee9dd;
+    --display:"Overpass",system-ui,sans-serif;--serif:"Source Serif 4",Georgia,serif;--mono:"Overpass Mono",monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--serif);color:var(--ink);background:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;min-height:100vh}
+  h1,h2,h3,.display{font-family:var(--display)}
+  a{color:inherit}img,svg{display:block;max-width:100%}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px;width:100%}
+  .eyebrow{font-family:var(--mono);font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--orange-deep)}
+
+  /* header */
+  header{position:sticky;top:0;z-index:50;background:rgba(253,253,248,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .nav .logo{height:42px}
+  .nav ul{display:flex;gap:30px;list-style:none;align-items:center}
+  .nav a.navlink{font-family:var(--display);font-weight:600;font-size:.95rem;text-decoration:none;color:var(--ink);position:relative;padding:.4em 0}
+  .nav a.navlink::after{content:"";position:absolute;left:0;bottom:-2px;height:2px;width:0;background:var(--orange);transition:width .2s}
+  .nav a.navlink:hover::after,.nav a.navlink[aria-current="page"]::after{width:100%}
+  .nav a.navlink[aria-current="page"]{color:var(--teal)}
+  .menu-btn{display:none;background:none;border:0;cursor:pointer;font-family:var(--mono);font-weight:600;color:var(--teal);font-size:.85rem;letter-spacing:.1em}
+
+  /* intro band */
+  .intro{background:linear-gradient(160deg,var(--teal-deep),var(--teal));color:#fff;padding:62px 0 56px}
+  .intro h1{font-weight:800;font-size:clamp(2rem,4.6vw,3.1rem);line-height:1.05;letter-spacing:-.015em;margin:.45em 0 .35em;max-width:760px}
+  .intro p{font-size:clamp(1.05rem,2vw,1.2rem);max-width:620px;color:rgba(255,255,255,.92)}
+
+  /* layout */
+  .grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:54px;padding:64px 0 80px;align-items:start}
+  @media(max-width:880px){.grid{grid-template-columns:1fr;gap:40px;padding:48px 0 64px}}
+
+  /* left rail */
+  .rail h2{color:var(--teal);font-weight:800;font-size:1.5rem;line-height:1.15;margin:.3em 0 .6em}
+  .rail .why{list-style:none;display:flex;flex-direction:column;gap:20px;margin-top:8px}
+  .rail .why li{padding-left:42px;position:relative}
+  .rail .why .ic{position:absolute;left:0;top:2px;width:30px;height:30px;border-radius:7px;background:var(--paper);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;color:var(--teal)}
+  .rail .why h3{font-size:1.02rem;font-weight:700;color:var(--ink);margin-bottom:2px}
+  .rail .why p{font-size:.96rem;color:var(--muted)}
+  .privacy{margin-top:30px;background:var(--paper);border-radius:6px;padding:18px 20px;border-left:4px solid var(--green)}
+  .privacy h3{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#2e7d46;margin-bottom:7px}
+  .privacy p{font-size:.92rem;color:var(--muted);line-height:1.5}
+
+  /* form card */
+  .card{background:#fff;border:1px solid var(--line);border-radius:9px;padding:34px 34px 30px;box-shadow:0 18px 40px -30px rgba(22,72,95,.45)}
+  @media(max-width:520px){.card{padding:26px 22px}}
+  .card .formhead{font-family:var(--display);font-weight:800;color:var(--teal);font-size:1.25rem;margin-bottom:4px}
+  .card .formsub{font-size:.96rem;color:var(--muted);margin-bottom:24px}
+  .field{margin-bottom:18px}
+  .field label{display:block;font-family:var(--display);font-weight:600;font-size:.9rem;margin-bottom:7px}
+  .field .opt{font-family:var(--serif);font-weight:400;color:var(--muted);font-size:.84rem}
+  .field input[type=text],.field input[type=email],.field select,.field textarea{
+    width:100%;font-family:var(--serif);font-size:1rem;color:var(--ink);
+    padding:.72em .85em;border:1.5px solid var(--line);border-radius:5px;background:#fdfdfb;transition:border .15s,box-shadow .15s;
+  }
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(47,134,196,.15)}
+  .field textarea{resize:vertical;min-height:84px}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:520px){.row2{grid-template-columns:1fr}}
+  fieldset{border:0;margin:4px 0 18px}
+  fieldset legend{font-family:var(--display);font-weight:600;font-size:.9rem;margin-bottom:10px;padding:0}
+  .checks{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px}
+  @media(max-width:520px){.checks{grid-template-columns:1fr}}
+  .chk{display:flex;align-items:flex-start;gap:9px;font-size:.94rem;line-height:1.35;cursor:pointer}
+  .chk input{margin-top:3px;width:16px;height:16px;accent-color:var(--teal);flex:none}
+  .consent{display:flex;align-items:flex-start;gap:10px;font-size:.92rem;color:var(--muted);line-height:1.45;margin:6px 0 22px}
+  .consent input{margin-top:3px;width:17px;height:17px;accent-color:var(--orange);flex:none}
+  .submit{
+    width:100%;font-family:var(--display);font-weight:700;font-size:1.05rem;color:#fff;background:var(--orange);
+    border:0;border-radius:5px;padding:.92em 1em;cursor:pointer;transition:background .15s,transform .15s,box-shadow .15s;
+  }
+  .submit:hover{background:var(--orange-deep);transform:translateY(-2px);box-shadow:0 10px 24px -10px rgba(201,118,42,.7)}
+  .submit:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+  .req{color:var(--orange-deep)}
+
+  /* setup banner (visible only until Formspree is wired) */
+  .setup-note{background:#fff7ec;border:1px dashed var(--orange);border-radius:7px;padding:14px 18px;margin-bottom:24px;font-size:.9rem;color:#8a5a1e;font-family:var(--mono);line-height:1.5}
+  .setup-note b{color:var(--orange-deep)}
+
+  /* footer */
+  footer{background:var(--ink);color:rgba(255,255,255,.6);padding:30px 0;font-family:var(--mono);font-size:.76rem;letter-spacing:.03em;margin-top:auto}
+  .foot-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  a:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+  @media(max-width:880px){.nav ul{display:none}.menu-btn{display:block}}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" aria-label="CART home"><img src="cart-logo.svg" alt="CART — Clermont Area Roads and Traffic" class="logo"></a>
+    <nav aria-label="Primary"><ul>
+      <li><a class="navlink" href="index.html">Home</a></li>
+      <li><a class="navlink" href="documents.html">Documents</a></li>
+      <li><a class="navlink" href="updates.html">Updates</a></li>
+      <li><a class="navlink" href="get-involved.html" aria-current="page">Get Involved</a></li>
+    </ul></nav>
+    <button class="menu-btn" aria-label="Menu" onclick="location.href='index.html'">MENU</button>
+  </div>
+</header>
+
+<section class="intro">
+  <div class="wrap">
+    <span class="eyebrow" style="color:#f6b878">Add Your Voice</span>
+    <h1>Show officials that residents are paying attention.</h1>
+    <p>Add your name in support of a new SR 28 corridor study. It takes thirty seconds — and when CART sits down with ODOT and local leaders, the number of residents behind us is one of the most persuasive things we can bring.</p>
+  </div>
+</section>
+
+<main class="wrap grid">
+  <!-- LEFT RAIL -->
+  <aside class="rail">
+    <span class="eyebrow">Why it matters</span>
+    <h2>Numbers change the conversation.</h2>
+    <ul class="why">
+      <li>
+        <span class="ic">1</span>
+        <h3>Officials count constituents</h3>
+        <p>A study request backed by hundreds of residents is far harder to set aside than one group's letter.</p>
+      </li>
+      <li>
+        <span class="ic">2</span>
+        <h3>Your area carries weight</h3>
+        <p>Telling us where you are helps us show support is coming from across the affected corridor and county.</p>
+      </li>
+      <li>
+        <span class="ic">3</span>
+        <h3>You set how involved you are</h3>
+        <p>Adding your name is enough on its own. If you're open to doing more, you can tell us — no pressure.</p>
+      </li>
+    </ul>
+    <div class="privacy">
+      <h3>Your information</h3>
+      <p>We use your details only to keep you posted and to show officials how many residents support a study. We never publish your name or email, and we never sell or share your information.</p>
+    </div>
+  </aside>
+
+  <!-- FORM CARD -->
+  <div class="card">
+    <!-- ===================================================================
+         SETUP NOTE — delete this whole .setup-note block once the form is live.
+         Before this form can send, you need to:
+           1. Create the CART Gmail (clermontcart@gmail.com).
+           2. Make a free Formspree account using that Gmail.
+           3. Create a new form; Formspree gives you a form ID like  xdoqzabc
+           4. In the <form> tag below, replace  YOUR_FORM_ID  with that ID.
+           5. Replace the _next URL below with your real success page URL
+              once the domain is live, e.g.
+              https://clermontcart.org/get-involved-success.html
+         Until then, submissions won't go anywhere.
+    ==================================================================== -->
+    <div class="setup-note">
+      <b>SETUP:</b> this form isn't connected yet. Once the CART Gmail + Formspree
+      account exist, swap <b>YOUR_FORM_ID</b> into the form tag (see the comment in
+      the code) and delete this note. Until then it won't send.
+    </div>
+
+    <div class="formhead">Add your name</div>
+    <div class="formsub">Fields marked <span class="req">*</span> are required.</div>
+
+    <!-- Formspree: replace YOUR_FORM_ID with the real form ID from your Formspree dashboard -->
+    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+
+      <!-- redirect after submit; once the domain is live use the full URL:
+           https://clermontcart.org/get-involved-success.html -->
+      <input type="hidden" name="_next" value="get-involved-success.html">
+      <!-- subject line of the email CART receives -->
+      <input type="hidden" name="_subject" value="New CART supporter sign-up">
+      <!-- simple spam honeypot; bots fill it, humans don't -->
+      <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <div class="row2">
+        <div class="field">
+          <label for="fname">First name <span class="req">*</span></label>
+          <input type="text" id="fname" name="First name" required autocomplete="given-name">
+        </div>
+        <div class="field">
+          <label for="lname">Last name <span class="req">*</span></label>
+          <input type="text" id="lname" name="Last name" required autocomplete="family-name">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="email">Email <span class="req">*</span></label>
+        <input type="email" id="email" name="Email" required autocomplete="email" placeholder="you@example.com">
+      </div>
+
+      <div class="row2">
+        <div class="field">
+          <label for="zip">ZIP code <span class="opt">(optional)</span></label>
+          <input type="text" id="zip" name="ZIP code" inputmode="numeric" autocomplete="postal-code" placeholder="451__">
+        </div>
+        <div class="field">
+          <label for="area">Where in the county? <span class="opt">(optional)</span></label>
+          <select id="area" name="Area">
+            <option value="">Select…</option>
+            <option>Miami Township</option>
+            <option>Goshen Township</option>
+            <option>Stonelick Township</option>
+            <option>Batavia / Batavia Township</option>
+            <option>Other — Clermont County</option>
+            <option>Outside Clermont County</option>
+          </select>
+        </div>
+      </div>
+
+      <fieldset>
+        <legend>I'd be willing to… <span class="opt" style="font-weight:400">(optional — check any)</span></legend>
+        <div class="checks">
+          <label class="chk"><input type="checkbox" name="Willing to" value="Get updates"> Get CART email updates</label>
+          <label class="chk"><input type="checkbox" name="Willing to" value="Contact officials"> Contact my officials</label>
+          <label class="chk"><input type="checkbox" name="Willing to" value="Attend a meeting"> Attend a public meeting</label>
+          <label class="chk"><input type="checkbox" name="Willing to" value="Share with neighbors"> Share this with neighbors</label>
+        </div>
+      </fieldset>
+
+      <div class="field">
+        <label for="comment">How does corridor traffic affect you? <span class="opt">(optional)</span></label>
+        <textarea id="comment" name="Comment" placeholder="A sentence about your commute, your street, or why this matters to you — helpful when we talk to officials."></textarea>
+      </div>
+
+      <label class="consent">
+        <input type="checkbox" name="Consent" value="Yes" required>
+        <span>I'm a resident or stakeholder and I support CART's request for a new SR 28 corridor study. CART may contact me about this effort. <span class="req">*</span></span>
+      </label>
+
+      <button type="submit" class="submit">Add my name →</button>
+    </form>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <span>© 2026 Clermont Area Roads &amp; Traffic (CART)</span>
+    <span>Clermont County, Ohio</span>
+  </div>
+</footer>
+
+<script>
+  const btn=document.querySelector('.menu-btn');
+  btn&&btn.addEventListener('click',()=>location.href='index.html');
+</script>
+</body>
+</html>

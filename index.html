@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CART — Clermont Area Roads &amp; Traffic</title>
+<meta name="description" content="Clermont Area Roads &amp; Traffic (CART) is a citizen group working to make sure road infrastructure keeps pace with the development already approved across Clermont County, Ohio — starting with the SR 28 corridor.">
+<link rel="icon" type="image/svg+xml" href="cart-icon.svg">
+<link rel="icon" type="image/png" href="cart-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;600;700;800;900&family=Overpass+Mono:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#1c5d7a;
+    --teal-deep:#16485f;
+    --teal-darker:#0f3a4d;
+    --orange:#e08a3c;
+    --orange-deep:#c9762a;
+    --green:#3f9e57;
+    --blue:#2f86c4;
+    --cream:#fdfdf8;
+    --paper:#f4efe4;
+    --ink:#19242b;
+    --muted:#5d6b72;
+    --line:#e4ddcd;
+    --line-soft:#eee9dd;
+    --display:"Overpass",system-ui,sans-serif;
+    --serif:"Source Serif 4",Georgia,serif;
+    --mono:"Overpass Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--serif);
+    color:var(--ink);
+    background:var(--cream);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  h1,h2,h3,.display{font-family:var(--display);}
+  a{color:inherit}
+  img,svg{display:block;max-width:100%}
+
+  /* ---------- utility ---------- */
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:.72rem;
+    font-weight:600;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--orange-deep);
+  }
+  .btn{
+    display:inline-flex;align-items:center;gap:.5em;
+    font-family:var(--display);font-weight:700;font-size:.98rem;
+    padding:.78em 1.5em;border-radius:3px;
+    text-decoration:none;cursor:pointer;border:2px solid transparent;
+    transition:transform .15s ease, background .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary{background:var(--orange);color:#fff}
+  .btn-primary:hover{background:var(--orange-deep);transform:translateY(-2px);box-shadow:0 8px 20px -8px rgba(201,118,42,.7)}
+  .btn-ghost{border-color:rgba(255,255,255,.45);color:#fff}
+  .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.1)}
+  .btn-solid{background:var(--teal);color:#fff}
+  .btn-solid:hover{background:var(--teal-deep);transform:translateY(-2px)}
+  a:focus-visible,.btn:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(253,253,248,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .nav .logo{height:42px;width:auto}
+  .nav ul{display:flex;gap:30px;list-style:none;align-items:center}
+  .nav a.navlink{
+    font-family:var(--display);font-weight:600;font-size:.95rem;
+    text-decoration:none;color:var(--ink);padding:.4em 0;position:relative;
+  }
+  .nav a.navlink::after{
+    content:"";position:absolute;left:0;bottom:-2px;height:2px;width:0;
+    background:var(--orange);transition:width .2s ease;
+  }
+  .nav a.navlink:hover::after,.nav a.navlink[aria-current="page"]::after{width:100%}
+  .nav a.navlink[aria-current="page"]{color:var(--teal)}
+  .nav .nav-cta{margin-left:6px}
+  .menu-btn{display:none;background:none;border:0;cursor:pointer;font-family:var(--mono);font-weight:600;color:var(--teal);font-size:.85rem;letter-spacing:.1em}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    background:
+      radial-gradient(1100px 500px at 78% -10%, rgba(47,134,196,.22), transparent 60%),
+      linear-gradient(160deg, var(--teal-deep) 0%, var(--teal) 60%, #1a5470 100%);
+    color:#fff;
+  }
+  .hero-inner{padding:88px 0 96px;position:relative;z-index:2;max-width:840px}
+  .hero .eyebrow{color:#f6b878}
+  .hero h1{
+    font-weight:800;line-height:1.02;letter-spacing:-.015em;
+    font-size:clamp(2.3rem,5.6vw,4rem);
+    margin:.5em 0 .55em;
+  }
+  .hero h1 .hl{color:#f6b878}
+  .hero p.lede{
+    font-size:clamp(1.08rem,2.1vw,1.32rem);
+    max-width:640px;color:rgba(255,255,255,.92);line-height:1.55;
+  }
+  .hero .actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+  /* dashed road centerline motif */
+  .roadline{
+    position:absolute;top:0;bottom:0;left:50%;width:14px;
+    transform:translateX(220px) rotate(8deg);
+    background:repeating-linear-gradient(to bottom,
+      rgba(255,255,255,.5) 0 22px, transparent 22px 46px);
+    opacity:.5;z-index:1;
+  }
+  @media(max-width:760px){.roadline{display:none}}
+
+  /* ---------- stat band ---------- */
+  .stats{background:var(--ink);color:var(--cream)}
+  .stats-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);
+  }
+  .stat{
+    padding:30px 26px;border-right:1px solid rgba(255,255,255,.1);
+  }
+  .stat:last-child{border-right:0}
+  .stat .num{font-family:var(--display);font-weight:800;font-size:2.2rem;line-height:1;color:#fff}
+  .stat .num .unit{font-size:1.1rem;color:var(--orange);font-weight:700}
+  .stat .lab{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.66);margin-top:10px;line-height:1.4}
+  @media(max-width:760px){.stats-grid{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2n){border-right:0}.stat{border-bottom:1px solid rgba(255,255,255,.1)}}
+
+  /* ---------- section ---------- */
+  section.block{padding:84px 0}
+  .section-head{max-width:720px;margin-bottom:14px}
+  .section-head h2{
+    font-weight:800;letter-spacing:-.01em;line-height:1.08;
+    font-size:clamp(1.7rem,3.4vw,2.5rem);margin:.4em 0 .5em;color:var(--teal);
+  }
+  .section-head p{font-size:1.1rem;color:var(--muted)}
+  .lead-para{font-size:1.14rem;max-width:720px;margin-top:18px}
+  .lead-para strong{color:var(--teal)}
+
+  /* ---------- pattern: found/promised/happened ---------- */
+  .ledger{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-top:48px}
+  .led-col{
+    border:1px solid var(--line);border-top:4px solid var(--teal);
+    background:#fff;border-radius:5px;padding:26px 24px;
+  }
+  .led-col.happened{border-top-color:var(--orange)}
+  .led-col h3{font-size:1.02rem;font-weight:800;color:var(--teal);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+  .led-col.happened h3{color:var(--orange-deep)}
+  .led-col .sub{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+  .led-col ul{list-style:none;display:flex;flex-direction:column;gap:13px}
+  .led-col li{font-size:.98rem;padding-left:26px;position:relative;line-height:1.45}
+  .led-col li::before{content:"";position:absolute;left:0;top:.42em;width:11px;height:11px;border-radius:50%}
+  .led-col.found li::before{background:var(--blue)}
+  .led-col.promised li::before{background:var(--green)}
+  .led-col.happened li::before{content:"✕";color:var(--orange-deep);font-family:var(--display);font-weight:800;font-size:.95rem;top:-.04em;left:1px;background:none}
+  .led-col.happened li.built::before{content:"✓";color:var(--green)}
+  @media(max-width:860px){.ledger{grid-template-columns:1fr}}
+
+  .punch{
+    margin-top:40px;border-left:5px solid var(--orange);
+    background:var(--paper);padding:26px 30px;border-radius:0 5px 5px 0;
+    font-size:1.18rem;font-weight:500;
+  }
+  .punch strong{color:var(--teal);font-weight:700}
+
+  /* ---------- developments table ---------- */
+  .dev-wrap{background:var(--paper)}
+  .table-card{margin-top:42px;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:#fff}
+  table{width:100%;border-collapse:collapse;font-size:.96rem}
+  thead th{
+    background:var(--teal);color:#fff;font-family:var(--display);font-weight:700;
+    text-align:left;padding:15px 20px;font-size:.86rem;letter-spacing:.03em;text-transform:uppercase;
+  }
+  tbody td{padding:15px 20px;border-top:1px solid var(--line-soft);vertical-align:top}
+  tbody tr:nth-child(even){background:#fbf9f3}
+  tbody td:first-child{font-weight:600;font-family:var(--display);color:var(--ink)}
+  .tag{font-family:var(--mono);font-size:.72rem;font-weight:600;letter-spacing:.03em;padding:.25em .7em;border-radius:99px;white-space:nowrap;display:inline-block}
+  .tag-build{background:#fdeede;color:var(--orange-deep)}
+  .tag-pending{background:#e7f0f9;color:var(--blue)}
+  .tag-done{background:#e6f3ea;color:#2e7d46}
+  .table-foot{padding:18px 22px;font-family:var(--mono);font-size:.78rem;color:var(--muted);background:#fbf9f3;border-top:1px solid var(--line)}
+  @media(max-width:680px){
+    table,thead,tbody,th,td,tr{display:block}
+    thead{display:none}
+    tbody td{border-top:0;padding:4px 20px}
+    tbody tr{border-top:1px solid var(--line);padding:14px 0}
+    tbody td:first-child{padding-top:14px;font-size:1.05rem}
+    tbody td::before{content:attr(data-l);display:block;font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+    tbody td:first-child::before{display:none}
+  }
+
+  /* ---------- the ask ---------- */
+  .ask{background:linear-gradient(160deg,var(--teal-deep),var(--teal));color:#fff}
+  .ask .section-head h2{color:#fff}
+  .ask-flow{
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:36px;
+    font-family:var(--display);font-weight:700;
+  }
+  .ask-flow .step{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);padding:.7em 1.1em;border-radius:4px;font-size:1rem}
+  .ask-flow .step.first{background:var(--orange);border-color:var(--orange)}
+  .ask-flow .arrow{color:#f6b878;font-size:1.3rem}
+  .ask-list{list-style:none;margin-top:38px;display:grid;grid-template-columns:1fr 1fr;gap:16px 34px;max-width:880px}
+  .ask-list li{padding-left:30px;position:relative;color:rgba(255,255,255,.94);font-size:1.02rem}
+  .ask-list li::before{content:"";position:absolute;left:0;top:.5em;width:13px;height:13px;border:3px solid var(--orange);border-radius:50%}
+  @media(max-width:680px){.ask-list{grid-template-columns:1fr}}
+
+  /* ---------- CTA band ---------- */
+  .joinband{background:var(--orange);color:#3a2410}
+  .joinband .wrap{display:flex;align-items:center;justify-content:space-between;gap:30px;padding:54px 28px;flex-wrap:wrap}
+  .joinband h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;line-height:1.1;max-width:620px}
+  .joinband p{margin-top:8px;font-size:1.06rem;max-width:560px;color:#4a3015}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--ink);color:rgba(255,255,255,.7);padding:54px 0 30px}
+  .foot-grid{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;align-items:flex-start}
+  footer .flogo{height:52px;width:auto;margin-bottom:14px}
+  footer .ftag{max-width:340px;font-size:.95rem;line-height:1.55}
+  footer .fcol h4{font-family:var(--display);color:#fff;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
+  footer .fcol a{display:block;color:rgba(255,255,255,.7);text-decoration:none;font-size:.95rem;margin-bottom:9px}
+  footer .fcol a:hover{color:var(--orange)}
+  .foot-rule{border:0;border-top:1px solid rgba(255,255,255,.13);margin:40px 0 22px}
+  .foot-bottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:.76rem;color:rgba(255,255,255,.5);letter-spacing:.03em}
+  .pending{color:var(--orange);font-weight:600}
+
+  @media(max-width:880px){
+    .nav ul{display:none}
+    .menu-btn{display:block}
+    section.block{padding:60px 0}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{transition:none !important;scroll-behavior:auto !important}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" aria-label="CART home"><img src="cart-logo.svg" alt="CART — Clermont Area Roads and Traffic" class="logo"></a>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a class="navlink" href="index.html" aria-current="page">Home</a></li>
+        <li><a class="navlink" href="documents.html">Documents</a></li>
+        <li><a class="navlink" href="updates.html">Updates</a></li>
+        <li><a class="navlink" href="get-involved.html">Get Involved</a></li>
+        <li class="nav-cta"><a class="btn btn-solid" href="get-involved.html">Add your voice</a></li>
+      </ul>
+    </nav>
+    <button class="menu-btn" aria-label="Menu">MENU</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="roadline" aria-hidden="true"></div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow">Clermont County, Ohio · Citizen Advocacy</span>
+    <h1>The county keeps approving the growth.<br><span class="hl">The roads aren't keeping up.</span></h1>
+    <p class="lede">CART is a citizen group working to make sure road infrastructure matches the development already approved across Clermont County — starting with the SR&nbsp;28 corridor, where thousands of new homes are coming and the road hasn't been widened in over a decade.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="get-involved.html">Add your voice →</a>
+      <a class="btn btn-ghost" href="#the-case">Read the case</a>
+    </div>
+  </div>
+</section>
+
+<!-- STAT BAND -->
+<section class="stats" aria-label="Key figures">
+  <div class="stats-grid">
+    <div class="stat">
+      <div class="num">91<span class="unit">%</span></div>
+      <div class="lab">SR 28 capacity used — measured in 2013</div>
+    </div>
+    <div class="stat">
+      <div class="num">13<span class="unit"> yrs</span></div>
+      <div class="lab">Since the only corridor study ever done</div>
+    </div>
+    <div class="stat">
+      <div class="num">7</div>
+      <div class="lab">Major developments approved since</div>
+    </div>
+    <div class="stat">
+      <div class="num">9,000<span class="unit">+</span></div>
+      <div class="lab">New daily vehicle trips coming</div>
+    </div>
+  </div>
+</section>
+
+<!-- THE CASE / PATTERN -->
+<section class="block" id="the-case">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">The Pattern</span>
+      <h2>Development gets approved. The infrastructure never follows.</h2>
+    </div>
+    <p class="lead-para">It's the same story across Clermont County: large developments are approved on roads that were already near capacity, with no plan to expand the roads to match. By the time traffic arrives, the fixes are years away — if they come at all. <strong>SR 28 is the clearest, best-documented example</strong>, but it isn't the only corridor under this pressure, and CART's scope is county-wide.</p>
+    <p class="lead-para">CART isn't anti-development. We believe growth that's planned and infrastructure-ready is good for our communities. The problem is the order things happen in — approval first, roads maybe later — and the way each project is judged in isolation while the corridor as a whole quietly fills past its limit.</p>
+  </div>
+</section>
+
+<!-- 2013 STUDY LEDGER -->
+<section class="block" id="study" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">The SR 28 Story · 2013–2026</span>
+      <h2>One study. A clear warning. Thirteen years of inaction.</h2>
+      <p>In 2013, Clermont County paid for the only comprehensive technical study SR 28 has ever had. It said exactly what needed to happen. Here's what it found, what it promised — and what was actually built.</p>
+    </div>
+    <div class="ledger">
+      <div class="led-col found">
+        <h3>What it found</h3>
+        <div class="sub">2013 Corridor Study</div>
+        <ul>
+          <li>SR 28 already at <strong>91% of capacity</strong> at the western end during evening peak.</li>
+          <li>Gridlock (10–15 mph average speeds) projected by 2030 without major improvements.</li>
+          <li>173 access points along 4+ miles — far beyond ODOT's standards.</li>
+        </ul>
+      </div>
+      <div class="led-col promised">
+        <h3>What it promised</h3>
+        <div class="sub">The study's own plan</div>
+        <ul>
+          <li>Widen SR 28 to four lanes with turn lanes at major intersections.</li>
+          <li>Rebuild and consolidate the Branch Hill Guinea Pike intersection.</li>
+          <li>Improvements would be <strong>triggered by development</strong> — roads improve as growth arrives.</li>
+        </ul>
+      </div>
+      <div class="led-col happened">
+        <h3>What was built</h3>
+        <div class="sub">Thirteen years later</div>
+        <ul>
+          <li>SR 28 widened to four lanes — <strong>never done.</strong></li>
+          <li>Branch Hill Guinea Pike rebuilt — <strong>never done.</strong></li>
+          <li class="built">One turn lane added to 2,400 ft of Branch Hill Guinea Pike — the entire physical legacy of the study.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="punch">
+      The study's plan said the road would improve as development came in. <strong>The exact opposite happened</strong> — the development came, and the improvements didn't. We're now four years from the gridlock the study warned about, with far more growth on the way than its projections ever assumed.
+    </div>
+  </div>
+</section>
+
+<!-- DEVELOPMENTS TABLE -->
+<section class="block dev-wrap">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Approved Since the Study</span>
+      <h2>Seven major developments. One corridor. No widening.</h2>
+      <p>Every project below was approved after the 2013 study — and is either under construction or in the pipeline today. Together they're projected to add more than 9,000 new daily trips to SR 28.</p>
+    </div>
+    <div class="table-card">
+      <table>
+        <thead>
+          <tr><th>Development</th><th>Size</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td data-l="Development">Eagles Nest <span style="font-weight:400;color:var(--muted)">(Drees Homes)</span></td><td data-l="Size">127 townhomes, 208 single-family, apartments, retail</td><td data-l="Status"><span class="tag tag-pending">Traffic study not yet approved</span></td></tr>
+          <tr><td data-l="Development">Conrad Apartments</td><td data-l="Size">315 luxury units</td><td data-l="Status"><span class="tag tag-pending">15-yr tax abatement approved</span></td></tr>
+          <tr><td data-l="Development">Lakefield Place <span style="font-weight:400;color:var(--muted)">(D.R. Horton)</span></td><td data-l="Size">Multi-phase single-family subdivision</td><td data-l="Status"><span class="tag tag-build">Under construction</span></td></tr>
+          <tr><td data-l="Development">Redwood Miami Township</td><td data-l="Size">Patio rental homes</td><td data-l="Status"><span class="tag tag-done">Occupied</span></td></tr>
+          <tr><td data-l="Development">Wawa Gas Station</td><td data-l="Size">High-trip commercial</td><td data-l="Status"><span class="tag tag-build">Under construction</span></td></tr>
+          <tr><td data-l="Development">Pebble Grove <span style="font-weight:400;color:var(--muted)">(Fischer Homes)</span></td><td data-l="Size">306 single-family homes</td><td data-l="Status"><span class="tag tag-pending">Approved</span></td></tr>
+          <tr><td data-l="Development">PLK Communities</td><td data-l="Size">Residential</td><td data-l="Status"><span class="tag tag-pending">No road improvements required</span></td></tr>
+        </tbody>
+      </table>
+      <div class="table-foot">Two of these sit immediately beside the Branch Hill Guinea Pike intersection — flagged for reconstruction in 2013, still unimproved today.</div>
+    </div>
+  </div>
+</section>
+
+<!-- THE ASK -->
+<section class="block ask">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" style="color:#f6b878">What We're Asking For</span>
+      <h2>A new, funded corridor study — the foundation for everything else.</h2>
+      <p style="color:rgba(255,255,255,.85)">We're not asking the state to commit to widening SR 28 tomorrow. We're asking for the current technical study that makes funded improvements possible. The 2013 study gave us the diagnosis. A 2026 study gives us the treatment plan.</p>
+    </div>
+    <div class="ask-flow" aria-label="Path to improvements">
+      <span class="step first">New study</span>
+      <span class="arrow">→</span>
+      <span class="step">State funding program</span>
+      <span class="arrow">→</span>
+      <span class="step">Funded improvements</span>
+      <span class="arrow">→</span>
+      <span class="step">SR 28 widened &amp; intersection rebuilt</span>
+    </div>
+    <ul class="ask-list">
+      <li>Assess the <strong>cumulative</strong> impact of all the new development — not one project at a time in isolation.</li>
+      <li>Prioritize the SR 28 / Branch Hill Guinea Pike intersection, now flanked by two new developments.</li>
+      <li>Coordinate with Goshen Township, Miami Township, and the County Engineer.</li>
+      <li>Tie the findings to the state's funding program so improvements have a real path forward.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- JOIN BAND -->
+<section class="joinband">
+  <div class="wrap">
+    <div>
+      <h2>This corridor affects everyone who drives it.</h2>
+      <p>Add your name to show ODOT and local officials that residents are paying attention. It takes thirty seconds, and numbers matter.</p>
+    </div>
+    <a class="btn btn-solid" href="get-involved.html" style="font-size:1.05rem">Add your voice →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img src="cart-logo.svg" alt="CART" class="flogo" style="filter:brightness(0) invert(1);opacity:.92">
+        <p class="ftag">Clermont Area Roads &amp; Traffic — a citizen group working to keep Clermont County's infrastructure in step with its growth.</p>
+      </div>
+      <div class="fcol">
+        <h4>Site</h4>
+        <a href="index.html">Home</a>
+        <a href="documents.html">Documents</a>
+        <a href="updates.html">Updates</a>
+        <a href="get-involved.html">Get Involved</a>
+      </div>
+      <div class="fcol">
+        <h4>Contact</h4>
+        <a href="get-involved.html">Add your voice</a>
+        <span style="display:block;color:rgba(255,255,255,.7);font-size:.95rem;margin-bottom:9px">contact@clermontcart.org <span class="pending">(coming soon)</span></span>
+      </div>
+    </div>
+    <hr class="foot-rule">
+    <div class="foot-bottom">
+      <span>© 2026 Clermont Area Roads &amp; Traffic (CART)</span>
+      <span>Clermont County, Ohio</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // lightweight mobile menu: scroll to nav links by toggling display
+  const btn = document.querySelector('.menu-btn');
+  const list = document.querySelector('.nav ul');
+  btn && btn.addEventListener('click', ()=>{
+    const shown = list.style.display === 'flex';
+    list.style.display = shown ? '' : 'flex';
+    list.style.position='absolute';list.style.top='74px';list.style.right='0';
+    list.style.left='0';list.style.flexDirection='column';list.style.background='var(--cream)';
+    list.style.padding='18px 28px';list.style.gap='16px';list.style.borderBottom='1px solid var(--line)';
+    if(shown){list.removeAttribute('style');}
+  });
+</script>
+</body>
+</html>

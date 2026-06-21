@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documents — CART</title>
+<meta name="description" content="The CART document library: the SR 28 Corridor Development Impact Report, the 2013 corridor study, and public meeting records. The evidence behind the case for a new corridor study.">
+<link rel="icon" type="image/svg+xml" href="cart-icon.svg">
+<link rel="icon" type="image/png" href="cart-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;600;700;800;900&family=Overpass+Mono:wght@500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#1c5d7a;--teal-deep:#16485f;--orange:#e08a3c;--orange-deep:#c9762a;
+    --green:#3f9e57;--blue:#2f86c4;--cream:#fdfdf8;--paper:#f4efe4;
+    --ink:#19242b;--muted:#5d6b72;--line:#e4ddcd;--line-soft:#eee9dd;
+    --display:"Overpass",system-ui,sans-serif;--serif:"Source Serif 4",Georgia,serif;--mono:"Overpass Mono",monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--serif);color:var(--ink);background:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;min-height:100vh}
+  h1,h2,h3,.display{font-family:var(--display)}
+  a{color:inherit}img,svg{display:block;max-width:100%}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px;width:100%}
+  .eyebrow{font-family:var(--mono);font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--orange-deep)}
+
+  header{position:sticky;top:0;z-index:50;background:rgba(253,253,248,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .nav .logo{height:42px}
+  .nav ul{display:flex;gap:30px;list-style:none;align-items:center}
+  .nav a.navlink{font-family:var(--display);font-weight:600;font-size:.95rem;text-decoration:none;color:var(--ink);position:relative;padding:.4em 0}
+  .nav a.navlink::after{content:"";position:absolute;left:0;bottom:-2px;height:2px;width:0;background:var(--orange);transition:width .2s}
+  .nav a.navlink:hover::after,.nav a.navlink[aria-current="page"]::after{width:100%}
+  .nav a.navlink[aria-current="page"]{color:var(--teal)}
+  .menu-btn{display:none;background:none;border:0;cursor:pointer;font-family:var(--mono);font-weight:600;color:var(--teal);font-size:.85rem;letter-spacing:.1em}
+
+  .intro{background:linear-gradient(160deg,var(--teal-deep),var(--teal));color:#fff;padding:60px 0 54px}
+  .intro h1{font-weight:800;font-size:clamp(2rem,4.6vw,3rem);line-height:1.05;letter-spacing:-.015em;margin:.45em 0 .35em;max-width:720px}
+  .intro p{font-size:clamp(1.04rem,2vw,1.18rem);max-width:640px;color:rgba(255,255,255,.92)}
+
+  main{flex:1;padding:56px 0 72px}
+
+  .setup-note{background:#fff7ec;border:1px dashed var(--orange);border-radius:8px;padding:18px 22px;margin-bottom:40px;font-family:var(--mono);font-size:.86rem;color:#8a5a1e;line-height:1.6}
+  .setup-note b{color:var(--orange-deep)}
+  .setup-note ol{margin:10px 0 0 20px}
+  .setup-note li{margin-bottom:4px}
+
+  .cat{margin-bottom:46px}
+  .cat-head{border-bottom:2px solid var(--line);padding-bottom:12px;margin-bottom:22px}
+  .cat-head h2{color:var(--teal);font-weight:800;font-size:1.5rem;line-height:1.1}
+  .cat-head p{color:var(--muted);font-size:1rem;margin-top:4px}
+
+  .docs{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px}
+  .doc{
+    display:flex;gap:15px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+    border-radius:8px;padding:18px 18px;text-decoration:none;color:inherit;
+    transition:border-color .15s,transform .15s,box-shadow .15s;position:relative;
+  }
+  .doc:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 14px 30px -22px rgba(22,72,95,.6)}
+  .doc:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+  .doc .ficon{flex:none;width:42px;height:52px;border-radius:5px;background:var(--paper);display:flex;align-items:center;justify-content:center;position:relative}
+  .doc .ficon span{font-family:var(--mono);font-size:.56rem;font-weight:700;letter-spacing:.04em;color:var(--orange-deep);position:absolute;bottom:6px}
+  .doc .ficon svg{width:20px;height:20px;margin-top:-6px}
+  .doc .dmeta{min-width:0}
+  .doc .dtitle{font-family:var(--display);font-weight:700;font-size:1.02rem;line-height:1.25;color:var(--ink);margin-bottom:5px}
+  .doc .dsub{font-family:var(--mono);font-size:.72rem;letter-spacing:.03em;color:var(--muted);text-transform:uppercase}
+  .doc .darrow{margin-left:auto;color:var(--blue);flex:none;align-self:center;opacity:0;transition:opacity .15s,transform .15s}
+  .doc:hover .darrow{opacity:1;transform:translateX(2px)}
+  .doc.example{cursor:default;border-style:dashed;background:#fcfbf7}
+  .doc.example:hover{transform:none;box-shadow:none;border-color:var(--line)}
+  .extag{position:absolute;bottom:14px;right:14px;font-family:var(--mono);font-size:.6rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--paper);padding:.2em .55em;border-radius:99px}
+
+  .cat-empty{font-family:var(--mono);font-size:.85rem;color:var(--muted);padding:18px 4px;font-style:normal}
+  .loading{font-family:var(--mono);font-size:.85rem;color:var(--muted);padding:8px 4px}
+
+  .archive{margin-top:8px;background:var(--paper);border-radius:8px;padding:22px 24px;border-left:4px solid var(--green)}
+  .archive h3{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#2e7d46;margin-bottom:8px}
+  .archive p{font-size:.96rem;color:var(--muted)}
+
+  footer{background:var(--ink);color:rgba(255,255,255,.6);padding:30px 0;font-family:var(--mono);font-size:.76rem;letter-spacing:.03em;margin-top:auto}
+  .foot-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  a:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+  @media(max-width:760px){.nav ul{display:none}.menu-btn{display:block}}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}.doc .darrow{opacity:1}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" aria-label="CART home"><img src="cart-logo.svg" alt="CART — Clermont Area Roads and Traffic" class="logo"></a>
+    <nav aria-label="Primary"><ul>
+      <li><a class="navlink" href="index.html">Home</a></li>
+      <li><a class="navlink" href="documents.html" aria-current="page">Documents</a></li>
+      <li><a class="navlink" href="updates.html">Updates</a></li>
+      <li><a class="navlink" href="get-involved.html">Get Involved</a></li>
+    </ul></nav>
+    <button class="menu-btn" aria-label="Menu" onclick="location.href='index.html'">MENU</button>
+  </div>
+</header>
+
+<section class="intro">
+  <div class="wrap">
+    <span class="eyebrow" style="color:#f6b878">Evidence &amp; Records</span>
+    <h1>The documents behind the case.</h1>
+    <p>CART's position rests on the public record — traffic studies, development data, and meeting summaries. It's all here, so anyone can check the facts for themselves.</p>
+  </div>
+</section>
+
+<main>
+  <div class="wrap">
+
+    <!-- ===================================================================
+         SETUP NOTE — delete this whole .setup-note block once the library is live.
+         This page loads PDFs straight from Google Drive, the same way the
+         Bayshore HOA site does. To turn it on:
+           1. In the CART Google Drive, create a folder for each category below.
+           2. Drop the PDFs in, and set each file to
+              "Anyone with the link" → Viewer  (required, or it won't show).
+           3. Get a Google Drive API key from the CART Google Cloud Console,
+              restricted to the Drive API and the clermontcart.org domains.
+           4. In the script block at the bottom of this file, replace
+              YOUR_DRIVE_API_KEY  and each  YOUR_FOLDER_ID_*  with the real values.
+           5. Delete this note. The example cards disappear automatically once
+              a real API key is in place.
+    ==================================================================== -->
+    <div class="setup-note" id="setupNote">
+      <b>SETUP:</b> the document library isn't connected to Google Drive yet, so the
+      cards below are <b>examples</b> showing the layout. To go live:
+      <ol>
+        <li>Create a Drive folder per category and add the PDFs (set each to "Anyone with the link → Viewer").</li>
+        <li>Get a Drive API key from the CART Google Cloud Console.</li>
+        <li>In this file's script, swap in <b>YOUR_DRIVE_API_KEY</b> and each <b>YOUR_FOLDER_ID</b>, then delete this note.</li>
+      </ol>
+    </div>
+
+    <div id="catcontainer"><!-- categories render here --></div>
+
+    <div class="archive">
+      <h3>Looking for something else?</h3>
+      <p>If a document you need isn't here, reach out through the <a href="get-involved.html" style="color:var(--teal);font-weight:600">Get Involved</a> page and we'll point you to it.</p>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <span>© 2026 Clermont Area Roads &amp; Traffic (CART)</span>
+    <span>Clermont County, Ohio</span>
+  </div>
+</footer>
+
+<script>
+/* ======================================================================
+   GOOGLE DRIVE DOCUMENT LIBRARY
+   Replace the placeholder values below with real ones to go live.
+   ====================================================================== */
+
+// --- 1. Your Drive API key (from the CART Google Cloud Console) ---
+const DRIVE_API_KEY = "YOUR_DRIVE_API_KEY";
+
+// --- 2. One entry per category. Put each category's Drive folder ID in folderId. ---
+//        Folder IDs are the long string in the folder's URL and never change.
+const CATEGORIES = [
+  {
+    title: "The Core Case",
+    desc: "The documents that lay out CART's argument in full.",
+    folderId: "YOUR_FOLDER_ID_CORE",
+    examples: [
+      { name: "SR 28 Corridor Development Impact Report (v3)", date: "June 2026" },
+      { name: "The Case for a New Study — one-pager", date: "June 2026" }
+    ]
+  },
+  {
+    title: "Source Studies & Data",
+    desc: "The underlying technical record the case is built on.",
+    folderId: "YOUR_FOLDER_ID_STUDIES",
+    examples: [
+      { name: "SR 28 Corridor Improvements — Executive Summary (CCTID, 2013)", date: "2013" }
+    ]
+  },
+  {
+    title: "Meeting Records",
+    desc: "Public summaries of CART's meetings with officials.",
+    folderId: "YOUR_FOLDER_ID_MEETINGS",
+    examples: [
+      { name: "ODOT District 8 Meeting — Public Summary", date: "June 2026" }
+    ]
+  }
+];
+
+// --- helpers ---
+function pdfIcon(label){
+  return '<span class="ficon"><svg viewBox="0 0 24 24" fill="none" stroke="#c9762a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg><span>'+label+'</span></span>';
+}
+function fmtDate(iso){
+  try{ const d=new Date(iso); return d.toLocaleDateString('en-US',{month:'short',year:'numeric'}); }catch(e){ return ''; }
+}
+function extOf(name, mime){
+  if(mime && mime.includes('pdf')) return 'PDF';
+  const m=(name||'').split('.').pop().toUpperCase();
+  return (m && m.length<=4) ? m : 'DOC';
+}
+function docCard(href, title, sub, isExample){
+  const arrow='<span class="darrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>';
+  if(isExample){
+    return '<div class="doc example">'+pdfIcon('PDF')+'<div class="dmeta"><div class="dtitle">'+title+'</div><div class="dsub">'+sub+'</div></div><span class="extag">Example</span></div>';
+  }
+  return '<a class="doc" href="'+href+'" target="_blank" rel="noopener">'+pdfIcon(sub.split('·')[0].trim()||'PDF')+'<div class="dmeta"><div class="dtitle">'+title+'</div><div class="dsub">'+sub+'</div></div>'+arrow+'</a>';
+}
+
+function renderCategoryShell(cat){
+  const sec=document.createElement('section');
+  sec.className='cat';
+  sec.innerHTML='<div class="cat-head"><h2>'+cat.title+'</h2><p>'+cat.desc+'</p></div>'+
+                '<div class="docs" data-docs></div>';
+  return sec;
+}
+
+async function loadCategory(cat, docsEl){
+  const url='https://www.googleapis.com/drive/v3/files?q='+encodeURIComponent("'"+cat.folderId+"' in parents and trashed=false")
+    +'&key='+DRIVE_API_KEY
+    +'&fields='+encodeURIComponent('files(id,name,mimeType,modifiedTime)')
+    +'&orderBy=name';
+  try{
+    const res=await fetch(url);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const data=await res.json();
+    const files=(data.files||[]).filter(f=>!f.mimeType.includes('folder'));
+    if(files.length===0){
+      docsEl.innerHTML='<div class="cat-empty">No documents in this section yet.</div>';
+      return;
+    }
+    docsEl.innerHTML=files.map(f=>{
+      const view='https://drive.google.com/file/d/'+f.id+'/view';
+      const sub=extOf(f.name,f.mimeType)+' · Updated '+fmtDate(f.modifiedTime);
+      const title=f.name.replace(/\.[^.]+$/,'');
+      return docCard(view,title,sub,false);
+    }).join('');
+  }catch(err){
+    docsEl.innerHTML='<div class="cat-empty">Couldn\u2019t load this section right now. Please try again later.</div>';
+    console.error('Drive load failed for',cat.title,err);
+  }
+}
+
+function renderExamples(cat, docsEl){
+  docsEl.innerHTML=cat.examples.map(e=>docCard('#',e.name,'PDF · '+e.date,true)).join('');
+}
+
+(function init(){
+  const mountEl = document.getElementById('catcontainer');
+  const live = DRIVE_API_KEY && DRIVE_API_KEY.indexOf('YOUR_') !== 0;
+  // hide the setup note when live
+  if(live){ const n=document.getElementById('setupNote'); if(n) n.style.display='none'; }
+  CATEGORIES.forEach(cat=>{
+    const shell=renderCategoryShell(cat);
+    mountEl.appendChild(shell);
+    const docsEl=shell.querySelector('[data-docs]');
+    if(live){
+      docsEl.innerHTML='<div class="loading">Loading documents…</div>';
+      loadCategory(cat, docsEl);
+    }else{
+      renderExamples(cat, docsEl);
+    }
+  });
+})();
+</script>
+</body>
+</html>
