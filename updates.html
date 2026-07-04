@@ -22,11 +22,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;600;700;800;900&family=Overpass+Mono:wght@500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
 <style>
-  :root{--teal:#1c5d7a;--teal-deep:#16485f;--orange:#e08a3c;--orange-deep:#c9762a;--cream:#fdfdf8;--ink:#19242b;--muted:#5d6b72;--line:#e4ddcd;
+  :root{--teal:#1c5d7a;--teal-deep:#16485f;--orange:#e08a3c;--orange-deep:#c9762a;--cream:#fdfdf8;--paper:#f4efe4;--ink:#19242b;--muted:#5d6b72;--line:#e4ddcd;
   --display:"Overpass",system-ui,sans-serif;--serif:"Source Serif 4",Georgia,serif;--mono:"Overpass Mono",monospace;}
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:var(--serif);color:var(--ink);background:var(--cream);line-height:1.6;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;min-height:100vh}
-  h1,h2,.display{font-family:var(--display)}
+  h1,h2,h3,.display{font-family:var(--display)}
   a{color:inherit}img,svg{display:block;max-width:100%}
   .wrap{max-width:1120px;margin:0 auto;padding:0 28px;width:100%}
   header{position:sticky;top:0;z-index:50;background:rgba(253,253,248,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
@@ -41,13 +41,25 @@
   .btn:hover{background:var(--teal-deep);transform:translateY(-2px)}
   .btn-orange{background:var(--orange)}.btn-orange:hover{background:var(--orange-deep)}
   a:focus-visible,.btn:focus-visible{outline:3px solid #2f86c4;outline-offset:3px}
-  .stub{flex:1;display:flex;align-items:center;padding:80px 0}
-  .stub-inner{max-width:680px}
-  .stub .eyebrow{font-family:var(--mono);font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--orange-deep)}
-  .stub h1{font-weight:800;font-size:clamp(2rem,5vw,3.1rem);line-height:1.05;letter-spacing:-.015em;color:var(--teal);margin:.5em 0 .4em}
-  .stub p{font-size:1.15rem;color:var(--muted);max-width:560px;margin-bottom:14px}
-  .stub .soon{display:inline-block;font-family:var(--mono);font-size:.74rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--orange-deep);background:#fdeede;padding:.4em .9em;border-radius:99px;margin-bottom:24px}
-  .stub .actions{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap}
+  .page-head{background:var(--paper);border-bottom:1px solid var(--line);padding:64px 0 52px}
+  .page-head .eyebrow{font-family:var(--mono);font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--orange-deep)}
+  .page-head h1{font-weight:800;font-size:clamp(2rem,5vw,3.1rem);line-height:1.05;letter-spacing:-.015em;color:var(--teal);margin:.4em 0 .3em}
+  .page-head p{font-size:1.12rem;color:var(--muted);max-width:620px}
+  .feed{flex:1;padding:56px 0 72px}
+  .feed-inner{max-width:760px}
+  .post{padding-bottom:44px;margin-bottom:44px;border-bottom:1px solid var(--line)}
+  .post:last-child{border-bottom:0;margin-bottom:0}
+  .post .meta{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+  .post time{font-family:var(--mono);font-size:.76rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .post .tag{font-family:var(--mono);font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--orange-deep);background:#fdeede;padding:.32em .8em;border-radius:99px}
+  .post h2{font-weight:800;font-size:clamp(1.4rem,3vw,1.9rem);line-height:1.15;letter-spacing:-.01em;color:var(--teal);margin-bottom:.5em}
+  .post p{font-size:1.06rem;color:var(--ink);margin-bottom:1em}
+  .post p:last-child{margin-bottom:0}
+  .post .lede{font-size:1.14rem;color:var(--muted)}
+  .post strong{font-weight:600}
+  .post a.inline{color:var(--teal);text-decoration:underline;text-underline-offset:2px;font-weight:600}
+  .endcap{margin-top:8px;padding:28px 0 0}
+  .endcap .actions{display:flex;gap:14px;flex-wrap:wrap}
   footer{background:var(--ink);color:rgba(255,255,255,.6);padding:30px 0;font-family:var(--mono);font-size:.76rem;letter-spacing:.03em}
   .foot-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   .menu-btn{display:none;background:none;border:0;cursor:pointer;font-family:var(--mono);font-weight:600;color:var(--teal);font-size:.85rem;letter-spacing:.1em}
@@ -67,18 +79,72 @@
     <button class="menu-btn" aria-label="Menu" onclick="location.href='index.html'">MENU</button>
   </div>
 </header>
-<main class="stub">
-  <div class="wrap stub-inner">
+
+<section class="page-head">
+  <div class="wrap">
     <span class="eyebrow">News &amp; Progress</span>
     <h1>Updates</h1>
-    <span class="soon">Coming soon</span>
-    <p>Meeting outcomes, milestones, and responses from ODOT and local officials will be posted here so residents can follow where things stand.</p>
-    <div class="actions">
-      <a class="btn" href="index.html">← Back to home</a>
-      <a class="btn btn-orange" href="get-involved.html">Add your voice →</a>
+    <p>Meeting outcomes, milestones, and what we're learning about the SR 28 corridor &mdash; posted here so residents can follow where things stand.</p>
+  </div>
+</section>
+
+<main class="feed">
+  <div class="wrap feed-inner">
+
+    <article class="post">
+      <div class="meta">
+        <time datetime="2026-06-18">June 18, 2026</time>
+        <span class="tag">ODOT</span>
+      </div>
+      <h2>CART meets with ODOT District 8 on the SR 28 corridor</h2>
+      <p class="lede">We sat down with the Ohio Department of Transportation's District 8 office to make a single, focused request: a new, funded corridor study for SR 28 between the I-275 interchange and Goshen Road.</p>
+      <p>The meeting, arranged with the help of State Representative Jean Schmidt, gave us the chance to lay out what has changed on the corridor since the last technical study was completed in 2013 &mdash; namely, the wave of new residential and commercial development that has been approved in the years since, with no matching plan to expand the road.</p>
+      <p>Our takeaway is straightforward and encouraging: there is agreement that the corridor's needs deserve a fresh, current look. The question now is how a new study gets initiated and funded, and that's where coordination between ODOT, the townships, and the county comes in. We're grateful for the time and the constructive conversation, and we'll keep residents posted as next steps take shape.</p>
+    </article>
+
+    <article class="post">
+      <div class="meta">
+        <time datetime="2026-06-15">June 2026</time>
+        <span class="tag">The Choke Point</span>
+      </div>
+      <h2>Branch Hill Guinea Pike: the corridor's most critical intersection</h2>
+      <p class="lede">If there's one spot on SR 28 that captures the whole problem, it's the intersection at Branch Hill Guinea Pike &mdash; flagged for reconstruction more than a decade ago, and still waiting.</p>
+      <p>The 2013 corridor study specifically recommended consolidating the offset intersections of SR 28 with Woodville Pike and Branch Hill Guinea Pike into a single, properly designed four-leg intersection. That recommendation was never built. The one piece of physical work the study produced anywhere on the corridor was a center turn lane along roughly 2,400 feet of Branch Hill Guinea Pike &mdash; useful, but a long way from the reconstruction that was called for.</p>
+      <p>What's changed is what's now going up around it. New development is arriving in the immediate vicinity of this same intersection, which means more turning movements and more daily trips funneling through the exact point the study identified as most in need of a fix. This is why CART keeps returning to it: solving the corridor means solving this intersection.</p>
+    </article>
+
+    <article class="post">
+      <div class="meta">
+        <time datetime="2026-06-01">June 2026</time>
+        <span class="tag">Why We're Here</span>
+      </div>
+      <h2>Why SR 28 needs a new corridor study</h2>
+      <p class="lede">In 2013, Clermont County paid for the only comprehensive study SR 28 has ever had. It said clearly what needed to happen. Thirteen years later, almost none of it has.</p>
+      <p>That study found the western end of SR 28 already operating at 91% of capacity during the evening rush &mdash; before any of today's developments were proposed. It projected gridlock conditions by 2030 without major improvements, counted 173 driveway access points along the 4-mile corridor, and recommended widening the road to four lanes with turn lanes at major intersections. The study's own plan said road improvements should be triggered by development as it arrived.</p>
+      <p>The opposite happened. The development came; the improvements didn't. We're now within a few years of the 2030 gridlock the study warned about, carrying far more growth than its projections assumed &mdash; and the diagnosis it offered is out of date. CART's ask is modest and concrete: a new, funded study that assesses the corridor's development as a whole and ties its findings to the state funding program, so real improvements finally have a path forward. The 2013 study gave us the diagnosis. A 2026 study gives us the treatment plan.</p>
+    </article>
+
+    <article class="post">
+      <div class="meta">
+        <time datetime="2026-04-01">April 2026</time>
+        <span class="tag">Development</span>
+      </div>
+      <h2>Seven major developments approved. The road hasn't changed.</h2>
+      <p class="lede">Across the SR 28 corridor between I-275 and Goshen, project after project has been approved on a road that hasn't been widened in over a decade.</p>
+      <p>The list is public record: the Eagles Nest redevelopment in Goshen Township (a 163-acre mix of townhomes, single-family homes, apartments, and retail), the Conrad apartments on Business 28, D.R. Horton's Lakefield Place, the Redwood patio homes near Branch Hill Guinea Pike, a Wawa now under construction at that same intersection, Fischer Homes' Pebble Grove off Linton Road, and the PLK Communities apartments at Smith Road. Taken together, these projects are projected to add well over 9,000 new daily vehicle trips to the corridor.</p>
+      <p>To be clear about where we stand: CART is not anti-development. Growth that is planned and infrastructure-ready is good for our communities. Our concern is the sequence &mdash; projects approved one at a time, each evaluated in isolation, while no one steps back to ask what happens to SR 28 when all of them are occupied at once. A current corridor study is how that question finally gets answered.</p>
+    </article>
+
+    <div class="endcap">
+      <div class="actions">
+        <a class="btn btn-orange" href="get-involved.html">Add your voice &rarr;</a>
+        <a class="btn" href="documents.html">See the documents &rarr;</a>
+      </div>
     </div>
+
   </div>
 </main>
-<footer><div class="wrap foot-row"><span>© 2026 Clermont Area Roads &amp; Traffic (CART)</span><span>Clermont County, Ohio</span></div></footer>
+
+<footer><div class="wrap foot-row"><span>&copy; 2026 Clermont Area Roads &amp; Traffic (CART)</span><span>Clermont County, Ohio</span></div></footer>
 </body>
 </html>
