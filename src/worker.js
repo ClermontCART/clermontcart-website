@@ -8,7 +8,7 @@
  *   3. Field validation
  *   4. Insert into D1 (duplicate emails are treated as success —
  *      the person is already on the list)
- *
+ *comment to force a deploy
  * Bindings (declared in wrangler.jsonc):
  *   env.DB     — D1 database (cart-supporters)
  *   env.ASSETS — static site files
