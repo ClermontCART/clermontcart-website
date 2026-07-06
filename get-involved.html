@@ -169,14 +169,13 @@
     <div class="formhead">Add your name</div>
     <div class="formsub">Fields marked <span class="req">*</span> are required.</div>
 
-    <!-- Formspree endpoint for the CART supporter form. Submitted via JavaScript
-         (AJAX) so the visitor stays on clermontcart.org and lands on our own
-         thank-you page — see the script at the bottom of this file. -->
-    <form action="https://formspree.io/f/xkolwpbb" method="POST" id="supporterForm">
+    <!-- CART's own sign-up endpoint (Cloudflare Pages Function -> D1 database).
+         Submitted via JavaScript (AJAX) so the visitor stays on clermontcart.org
+         and lands on our own thank-you page — see the script at the bottom of
+         this file. Works without JavaScript too (plain POST + redirect). -->
+    <form action="/api/signup" method="POST" id="supporterForm">
 
-      <!-- subject line of the email CART receives -->
-      <input type="hidden" name="_subject" value="New CART supporter sign-up">
-      <!-- simple spam honeypot; bots fill it, humans don't -->
+      <!-- spam honeypot; bots fill it, humans don't -->
       <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
 
       <div class="row2">
@@ -235,6 +234,13 @@
       </label>
 
       <div class="form-error" id="formError" role="alert" hidden></div>
+
+      <!-- Cloudflare Turnstile — invisible-to-most-humans bot check.
+           Replace data-sitekey with the site key from your Turnstile widget
+           (Cloudflare dashboard). The matching SECRET key goes in the Pages
+           project as the TURNSTILE_SECRET_KEY environment variable. -->
+      <div class="cf-turnstile" data-sitekey="0x4AAAAAADwk8fx4JPDBBuZP" data-theme="light" style="margin:0 0 14px"></div>
+
       <button type="submit" class="submit">Add my name →</button>
     </form>
   </div>
@@ -247,6 +253,7 @@
   </div>
 </footer>
 
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script>
   const btn=document.querySelector('.menu-btn');
   btn&&btn.addEventListener('click',()=>location.href='index.html');
@@ -271,30 +278,29 @@
         headers: { 'Accept': 'application/json' }
       });
 
-      if (response.ok) {
+      let data = null;
+      try { data = await response.json(); } catch (_) {}
+
+      if (response.ok && data && data.ok) {
         // success — go to our branded thank-you page
         window.location.href = 'get-involved-success.html';
         return;
       }
 
-      // Formspree returned an error — surface a friendly message
-      let msg = 'Something went wrong sending your form. Please try again in a moment.';
-      try {
-        const data = await response.json();
-        if (data && Array.isArray(data.errors) && data.errors.length) {
-          msg = data.errors.map(function(x){ return x.message; }).join(' ');
-        }
-      } catch (_) {}
-      errBox.textContent = msg;
+      errBox.textContent = (data && data.error) ||
+        'Something went wrong sending your form. Please try again in a moment.';
       errBox.hidden = false;
       submitBtn.disabled = false;
       submitBtn.textContent = originalLabel;
+      // Turnstile tokens are single-use — get a fresh one for the retry.
+      if (window.turnstile) { try { window.turnstile.reset(); } catch (_) {} }
 
     } catch (err) {
       errBox.textContent = 'Could not reach the server. Please check your connection and try again.';
       errBox.hidden = false;
       submitBtn.disabled = false;
       submitBtn.textContent = originalLabel;
+      if (window.turnstile) { try { window.turnstile.reset(); } catch (_) {} }
     }
   });
 </script>

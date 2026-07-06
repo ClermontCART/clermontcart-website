@@ -1,7 +1,17 @@
 {
   "name": "clermontcart-website",
   "compatibility_date": "2026-06-21",
+  "main": "src/worker.js",
   "assets": {
-    "directory": "./"
-  }
+    "directory": "./",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "cart-supporters",
+      "database_id": "61b046cc-318d-45d4-ad5e-0d5417749e62"
+    }
+  ]
 }
