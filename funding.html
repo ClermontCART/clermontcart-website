@@ -104,34 +104,22 @@
 
   /* ---------- hero ---------- */
   .hero{
-    position:relative;overflow:hidden;
-    background:
-      radial-gradient(1100px 500px at 78% -10%, rgba(47,134,196,.22), transparent 60%),
-      linear-gradient(160deg, var(--teal-deep) 0%, var(--teal) 60%, #1a5470 100%);
+    background:linear-gradient(160deg,var(--teal-deep),var(--teal));
     color:#fff;
   }
-  .hero-inner{padding:88px 0 96px;position:relative;z-index:2;max-width:840px}
+  .hero-inner{padding:60px 0 54px;max-width:720px}
   .hero .eyebrow{color:#f6b878}
   .hero h1{
-    font-weight:800;line-height:1.02;letter-spacing:-.015em;
-    font-size:clamp(2.3rem,5.6vw,4rem);
-    margin:.5em 0 .55em;
+    font-weight:800;line-height:1.05;letter-spacing:-.015em;
+    font-size:clamp(2rem,4.6vw,3rem);
+    margin:.45em 0 .35em;
   }
-  .hero h1 .hl{color:#f6b878}
+  .hero h1 .hl{color:inherit}
   .hero p.lede{
-    font-size:clamp(1.08rem,2.1vw,1.32rem);
+    font-size:clamp(1.04rem,2vw,1.18rem);
     max-width:640px;color:rgba(255,255,255,.92);line-height:1.55;
   }
   .hero .actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
-  /* dashed road centerline motif */
-  .roadline{
-    position:absolute;top:0;bottom:0;left:50%;width:14px;
-    transform:translateX(220px) rotate(8deg);
-    background:repeating-linear-gradient(to bottom,
-      rgba(255,255,255,.5) 0 22px, transparent 22px 46px);
-    opacity:.5;z-index:1;
-  }
-  @media(max-width:760px){.roadline{display:none}}
 
   /* ---------- stat band ---------- */
   .stats{background:var(--ink);color:var(--cream)}
@@ -291,7 +279,6 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="roadline" aria-hidden="true"></div>
   <div class="wrap hero-inner">
     <span class="eyebrow">How the System Works</span>
     <h1>Who actually pays<br><span class="hl">to fix a road?</span></h1>
